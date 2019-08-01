@@ -1,0 +1,7 @@
+name: ClaimRemover
+version: ${project.version}
+author: Freebuild
+api-version: 1.13
+depend: []
+description: ${project.description}
+main: fr.freebuild.claimremover.ClaimRemover
