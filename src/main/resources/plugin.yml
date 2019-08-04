@@ -2,6 +2,22 @@ name: ClaimRemover
 version: ${project.version}
 author: Freebuild
 api-version: 1.13
-depend: []
+depend: [RedProtect]
 description: ${project.description}
 main: fr.freebuild.claimremover.ClaimRemover
+commands:
+  claimremover:
+    description: Remove group of claim
+    aliases: [crm]
+    permission: claimremover.commands
+permissions:
+  claimremover.*:
+    description: Can use all features of claimremover
+    children:
+      claimremover.commands.*: true
+  # ==== COMMANDS ====
+  claimremover.commands:
+    description: Base permission for command
+    default: true
+  claimremover.commands.*:
+    description: Can use all commands

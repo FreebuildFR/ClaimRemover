@@ -1,2 +1,3 @@
 # Maximum size of a claim to define if it can be deleted
 MaxSizeClaim: 5000
+InactivityMonths: 12

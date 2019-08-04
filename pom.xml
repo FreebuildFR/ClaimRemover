@@ -11,6 +11,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <spigot.version>1.14.4-R0.1-SNAPSHOT</spigot.version>
+    <redprotect.version>7.6.2</redprotect.version>
   </properties>
   <build>
     <finalName>${project.name}-${project.version}</finalName>
@@ -31,6 +32,10 @@
       <id>lombok-repo</id>
       <url>https://mvnrepository.com/artifact/org.projectlombok/lombok</url>
     </repository>
+    <repository>
+      <id>redprotect-repo</id>
+      <url>https://raw.githubusercontent.com/FabioZumbi12/RedProtect/mvn-repo/</url>
+    </repository>
   </repositories>
   <dependencies>
     <!-- Lombok -->
@@ -45,6 +50,26 @@
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>${spigot.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- RedProtect -->
+    <dependency>
+      <groupId>br.net.fabiozumbi12.RedProtect</groupId>
+      <artifactId>RedProtect-Core</artifactId>
+      <version>${redprotect.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>br.net.fabiozumbi12.RedProtect</groupId>
+      <artifactId>RedProtect-Spigot</artifactId>
+      <version>${redprotect.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- LiteBans -->
+    <dependency>
+      <groupId>litebans</groupId>
+      <artifactId>api</artifactId>
+      <version>0.3.1</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
