@@ -1,23 +1,33 @@
 name: ClaimRemover
-version: ${project.version}
+version: 0.0.1-SNAPSHOT
 author: Freebuild
-api-version: 1.13
+api-version: "1.13"
 depend: [RedProtect]
-description: ${project.description}
+softdepend: [LiteBans]
+description: Remover plugin for RedProtect Claim
 main: fr.freebuild.claimremover.ClaimRemover
 commands:
   claimremover:
-    description: Remove group of claim
-    aliases: [crm]
+    usage: /claimremover analyze|delete|export|import
+    alias: [crm]
     permission: claimremover.commands
 permissions:
   claimremover.*:
-    description: Can use all features of claimremover
+    description: Can use all feature of the plugin
     children:
-      claimremover.commands.*: true
-  # ==== COMMANDS ====
-  claimremover.commands:
-    description: Base permission for command
-    default: true
+     claimremover.commands.*: true
   claimremover.commands.*:
     description: Can use all commands
+    children:
+      claimremover.commands.analyze: true
+      claimremover.commands.delete: true
+      claimremover.commands.export: true
+      claimremover.commands.import: true
+  claimremover.commands.analyze:
+    description: Can analyze all claims to delete
+  claimremover.commands.delete:
+    description: Can delete all claims analyzed
+  claimremover.commands.export:
+    description: Can export analyze to a csv file
+  claimremover.commands.import:
+    description: Can import analyze from a csv file
