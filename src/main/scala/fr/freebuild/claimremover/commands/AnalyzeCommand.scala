@@ -5,7 +5,7 @@ import java.util.Date
 import br.net.fabiozumbi12.RedProtect.Bukkit.{RedProtect, Region}
 import fr.freebuild.claimremover.{ClaimRemoverPlugin, PlayerUtils, RegionsAnalysis}
 
-import scala.collection.JavaConverters._
+import scala.collection.JavaConverters.asScalaSetConverter
 import scala.collection.mutable
 
 object AnalyzeCommand extends Command {
@@ -20,7 +20,6 @@ object AnalyzeCommand extends Command {
     }).toSet
 
     ClaimRemoverPlugin.analysis = RegionsAnalysis(allRegions.filter(canBeDeleted(_, excludedPlayers)).toList)
-    ClaimRemoverPlugin.analysis.regions.foreach(System.out.println(_))
     true
   }
 
@@ -28,8 +27,8 @@ object AnalyzeCommand extends Command {
     val leaders = region.getLeaders.asScala.map(_.getUUID)
     val inactivity = ClaimRemoverPlugin.getConfig.getInt("InactivityMonths", 12) * 1000 * 60 * 60 * 24 * 30
     (
-      excludedPlayers.forall(!leaders.contains(_)) &&
-      leaders.forall((uuid) => new Date().compareTo(PlayerUtils.getLastConnection(uuid)) > inactivity)
+      excludedPlayers.forall(!leaders.contains(_)) /*&&
+      leaders.forall((uuid) => new Date().compareTo(PlayerUtils.getLastConnection(uuid)) > inactivity)*/
     )
   }
 }
