@@ -27,6 +27,7 @@ libraryDependencies ++= Seq(
     "xyz.janboerman" % "ScalaLoader" % "0.12-SNAPSHOT" % "provided",
     "com.github.pathikrit" %% "better-files" % "3.8.0",
     "com.github.tototoshi" %% "scala-csv" % "1.3.6",
+    "io.circe" %% "circe-yaml" % "0.11.0-M1",
 /* "com.github.Jannyboy11.ScalaPluginLoader" % "ScalaLoader" % "0.12.0-SNAPSHOT" % "provided", */
 
     /* Minecraft plugin dependencies */

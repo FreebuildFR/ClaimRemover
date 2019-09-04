@@ -1,16 +1,16 @@
-InfoMessages:
-  PluginReloading: "Le plugin est en train de recharger..."
-  PluginReloaded: "Le plugin a fini de recharger."
-  AffectedClaims: "Claims affectés: %d/%d"
-ErrorMessages:
-  PermissionNotAllowed: "&cVous n'êtes pas autorisé à faire cette action"
-  InvalidCommand: "&cCette commande n'est pas valide : "
-  PlayerOnly: "&cCette commande peut uniquement être exécutée par un joueur"
-  NoAnalyze: "&cAucune analyze n'a été faite"
-Commands:
-  SeeHelp: "&6Regardes l'aide : &c/claimremover help"
-  HelpCommand:
-    Usage: "&6Utilisation :"
-    Help: "&c/claimremover [help]&6 - Affiche l'aide"
-    Reload: "&c/claimremover reload&6 - Permet de recharger le plugin"
-    Version: "&c/claimremover version&6 - Affiche la version du plugin"
+infoMessages:
+  pluginReloading: "Le plugin est en train de recharger..."
+  pluginReloaded: "Le plugin a fini de recharger."
+  affectedClaims: "Claims affectés: %d/%d"
+errorMessages:
+  permissionNotAllowed: "&cVous n'êtes pas autorisé à faire cette action"
+  invalidCommand: "&cCette commande n'est pas valide : "
+  playerOnly: "&cCette commande peut uniquement être exécutée par un joueur"
+  noAnalyze: "&cAucune analyze n'a été faite"
+commands:
+  seeHelp: "&6Regardes l'aide : &c/claimremover help"
+  helpCommand:
+    usage: "&6Utilisation :"
+    help: "&c/claimremover [help]&6 - Affiche l'aide"
+    reload: "&c/claimremover reload&6 - Permet de recharger le plugin"
+    version: "&c/claimremover version&6 - Affiche la version du plugin"

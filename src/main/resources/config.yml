@@ -1,18 +1,18 @@
-ClaimSize:
+claimSize:
   # If true it will delete claim that have size bellow the specified size
-  EnableClaimSize: true
+  enable: true
   # Maximum size of a claim to define if it can be deleted
-  MaxSizeClaim: 5000
+  maxClaimSize: 5000
 
 # Config for clam removal affect by player inactivity
-Inactivity:
+inactivity:
   # If true it will delete claim that are older than a specific period
-  EnableInactivty: true
+  enable: true
   # Period in months to delete claims
-  InactivityMonths: 12
+  inactivityMonths: 12
 
 # Config for claim removal affected by Bans
 # Needed: LiteBans
-Bans:
+bans:
   # If true it will delete also claims of bannned players
-  EnableBans: false
+  enable: false

@@ -2,6 +2,7 @@ package fr.freebuild.claimremover
 
 import java.net.URL
 
+import fr.freebuild.claimremover.configurations.ConfigLoader
 import xyz.janboerman.scalaloader.plugin.description.{Scala, ScalaVersion}
 import xyz.janboerman.scalaloader.plugin.{ScalaPlugin, ScalaPluginDescription}
 

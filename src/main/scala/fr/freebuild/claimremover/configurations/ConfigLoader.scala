@@ -1,14 +1,11 @@
-package fr.freebuild.claimremover
+package fr.freebuild.claimremover.configurations
 
-import java.io.{IOException, InputStream}
-import java.net.URLConnection
+import java.io.InputStream
 
-import better.files._
-import fr.freebuild.claimremover.ClaimRemoverPlugin.getClassLoader
+import fr.freebuild.claimremover.ClaimRemoverPlugin
 import xyz.janboerman.scalaloader.plugin.ScalaPluginClassLoader
 
-import scala.io.Source
-
+import scala.util.Try
 
 object ConfigLoader {
 
@@ -20,17 +17,12 @@ object ConfigLoader {
    * @return Return an option of InputStream opened
    */
   private def getResource(classLoader: ScalaPluginClassLoader, path: String): Option[InputStream] = {
-    val resourceUrl = classLoader.findResource(path);
-    if (resourceUrl == null)
-      None
-    else
-      try {
-        val connection = resourceUrl.openConnection
+    Option(classLoader.findResource(path)).flatMap { resourceUrl =>
+      Try(resourceUrl.openConnection).map { connection =>
         connection.setUseCaches(false)
-        Some(connection.getInputStream)
-      } catch {
-        case e: IOException => None
-      }
+        connection.getInputStream
+      }.toOption
+    }
   }
 
   /**
