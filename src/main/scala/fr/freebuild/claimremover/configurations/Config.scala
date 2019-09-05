@@ -1,6 +1,6 @@
 package fr.freebuild.claimremover.configurations
 
-case class ClaimSize(enable: Boolean, maxClaimSize: String)
+case class ClaimSize(enable: Boolean, maxClaimSize: Int)
 
 case class Inactivity(enable: Boolean, inactivityMonths: Int)
 

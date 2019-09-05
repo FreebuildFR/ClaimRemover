@@ -1,9 +1,16 @@
 package fr.freebuild.claimremover.configurations
 
-import java.io.InputStream
+import java.io.{InputStream, InputStreamReader}
 
+import better.files._
 import fr.freebuild.claimremover.ClaimRemoverPlugin
 import xyz.janboerman.scalaloader.plugin.ScalaPluginClassLoader
+import fr.freebuild.claimremover.utils.ColorUtils._
+import io.circe.yaml.parser
+import io.circe._
+import io.circe.generic.auto._
+import cats.syntax.either._
+import io.circe.yaml
 
 import scala.util.Try
 
@@ -40,5 +47,10 @@ object ConfigLoader {
         case None => ClaimRemoverPlugin.getLogger.warning(s"File $path doesn't exist")
       }
     }
+  }
+
+  def loadResource(path: String): Json = {
+    val inputStream = new InputStreamReader(s"${ClaimRemoverPlugin.getDataFolder}/$path".toFile.newInputStream)
+    parser.parse(inputStream).leftMap(err => err: Error).valueOr(throw _)
   }
 }

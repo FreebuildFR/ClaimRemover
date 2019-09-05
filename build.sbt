@@ -27,8 +27,11 @@ libraryDependencies ++= Seq(
     "xyz.janboerman" % "ScalaLoader" % "0.12-SNAPSHOT" % "provided",
     "com.github.pathikrit" %% "better-files" % "3.8.0",
     "com.github.tototoshi" %% "scala-csv" % "1.3.6",
+    "io.circe" %% "circe-core" % "0.12.0-RC4",
+    "io.circe" %% "circe-generic" % "0.12.0-RC4",
+    "io.circe" %% "circe-parser" % "0.12.0-RC4",
     "io.circe" %% "circe-yaml" % "0.11.0-M1",
-/* "com.github.Jannyboy11.ScalaPluginLoader" % "ScalaLoader" % "0.12.0-SNAPSHOT" % "provided", */
+    /* "com.github.Jannyboy11.ScalaPluginLoader" % "ScalaLoader" % "0.12.0-SNAPSHOT" % "provided", */
 
     /* Minecraft plugin dependencies */
     "br.net.fabiozumbi12.RedProtect" % "RedProtect-Core" % "7.6.2" % "provided" intransitive(),
