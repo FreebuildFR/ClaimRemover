@@ -6,13 +6,14 @@ import br.net.fabiozumbi12.RedProtect.Bukkit.Region
 import com.github.tototoshi.csv.CSVWriter
 import fr.freebuild.claimremover.ClaimRemoverPlugin
 import better.files._
+import org.bukkit.command.CommandSender
 
 import scala.collection.mutable
 
 object ExportCommand extends Command {
   val header = List("Name","StartLocation","EndLocation","Size","Leaders","Admins")
 
-  override def execute(args: Array[String]): Boolean = {
+  override def execute(sender: CommandSender, args: Array[String]): Boolean = {
     System.out.println("Export")
 
     System.out.println(header);

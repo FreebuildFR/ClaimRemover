@@ -3,13 +3,14 @@ package fr.freebuild.claimremover.commands
 import java.util.Date
 
 import br.net.fabiozumbi12.RedProtect.Bukkit.{RedProtect, Region}
-import fr.freebuild.claimremover.{ClaimRemoverPlugin, PlayerUtils, RegionsAnalysis}
+import fr.freebuild.claimremover.{ClaimRemoverPlugin, RegionsAnalysis}
+import org.bukkit.command.CommandSender
 
 import scala.collection.JavaConverters.asScalaSetConverter
 import scala.collection.mutable
 
 object AnalyzeCommand extends Command {
-  override def execute(args: Array[String]): Boolean = {
+  override def execute(sender: CommandSender, args: Array[String]): Boolean = {
     val maxSize = ClaimRemoverPlugin.configs.config.claimSize.maxClaimSize
     val allRegions = RedProtect.get().getAPI.getAllRegions.asScala
 

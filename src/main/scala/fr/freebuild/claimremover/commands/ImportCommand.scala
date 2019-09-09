@@ -4,10 +4,11 @@ import better.files._
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region
 import com.github.tototoshi.csv.{CSVReader, CSVWriter}
 import fr.freebuild.claimremover.ClaimRemoverPlugin
+import org.bukkit.command.CommandSender
 
 object ImportCommand extends Command {
 
-  override def execute(args: Array[String]): Boolean = {
+  override def execute(sender: CommandSender, args: Array[String]): Boolean = {
     System.out.println("Import")
 
     val file = s"${ClaimRemoverPlugin.getDataFolder}/exports/regions".toFile

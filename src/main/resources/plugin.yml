@@ -7,7 +7,7 @@ description: Remover plugin for RedProtect Claim
 main: fr.freebuild.claimremover.ClaimRemover
 commands:
   claimremover:
-    usage: /claimremover analyze|delete|export|import
+    usage: /claimremover analyze|delete|export|import|reload
     alias: [crm]
     permission: claimremover.commands
 permissions:

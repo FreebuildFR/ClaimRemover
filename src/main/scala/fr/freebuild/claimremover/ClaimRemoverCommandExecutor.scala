@@ -1,6 +1,6 @@
 package fr.freebuild.claimremover
 
-import fr.freebuild.claimremover.commands.{AnalyzeCommand, ExportCommand, ImportCommand}
+import fr.freebuild.claimremover.commands.{AnalyzeCommand, DeleteCommand, ExportCommand, ImportCommand, ReloadCommand}
 import org.bukkit.command.{Command, CommandExecutor, CommandSender}
 
 object ClaimRemoverCommandExecutor extends CommandExecutor {
@@ -19,10 +19,11 @@ object ClaimRemoverCommandExecutor extends CommandExecutor {
         false
       else
         args(0) match {
-          case "analyze" => AnalyzeCommand.execute(args)
-          case "export" => ExportCommand.execute(args)
-          case "import" => ImportCommand.execute(args)
-          case "delete" => true
+          case "analyze" => AnalyzeCommand.execute(sender, args)
+          case "export" => ExportCommand.execute(sender, args)
+          case "import" => ImportCommand.execute(sender, args)
+          case "delete" => DeleteCommand.execute(sender, args)
+          case "reload" => ReloadCommand.execute(sender, args)
           case _ => false
         }
     }

@@ -45,4 +45,9 @@ object ClaimRemoverPlugin
   def configs: ConfigsStore = _configs
 
   def disable(): Unit = getPluginLoader.disablePlugin(this)
+
+  def reload(): Unit = {
+    onDisable()
+    onEnable()
+  }
 }
