@@ -1,20 +1,16 @@
 package fr.freebuild.claimremover
 
-import java.net.URL
-
-import fr.freebuild.claimremover.configurations.{Config, ConfigLoader, Language}
+import fr.freebuild.claimremover.configurations.ConfigurationLoader
+import fr.freebuild.claimremover.configurations.loaders._
+import fr.freebuild.claimremover.configurations.models._
 import xyz.janboerman.scalaloader.plugin.description.{Scala, ScalaVersion}
 import xyz.janboerman.scalaloader.plugin.{ScalaPlugin, ScalaPluginDescription}
-import io.circe.yaml.parser
-import io.circe._
-import io.circe.generic.auto._
-import cats.syntax.either._
-import io.circe.yaml
 
 @Scala(version = ScalaVersion.v2_13_0)
 object ClaimRemoverPlugin
   extends ScalaPlugin(new ScalaPluginDescription("ClaimRemover", "0.0.1-SNAPSHOT")) {
 
+  private var _configs: ConfigsStore = _
   var analysis = RegionsAnalysis(null)
 
   override def onEnable(): Unit = {
@@ -27,16 +23,26 @@ object ClaimRemoverPlugin
    * Load all resources needed
    */
   private def loadResources(): Unit = {
-    Array(
-      "config.yml",
-      "lang.yml"
-    ).foreach(ConfigLoader.saveResource(getClassLoader, _))
 
-    val config: Config = ConfigLoader.loadResource("config.yml").as[Config].valueOr(throw _)
-    val lang: Language = ConfigLoader.loadResource("lang.yml").as[Language].valueOr(throw _)
+    val store = for {
+      config <- {
+        ConfigurationLoader.saveResource(getClassLoader, "config.yml")
+        ConfigLoader(s"$getDataFolder/config.yml").load
+      }
+      language <- {
+        ConfigurationLoader.saveResource(getClassLoader, "language.yml")
+        LanguageLoader(s"$getDataFolder/language.yml").load
+      }
+    } yield ConfigsStore(config, language)
 
-    System.out.println(config.claimSize.maxClaimSize)
-    System.out.println(lang.errorMessages.noAnalyze)
+    if (store.isEmpty)
+      disable()
+    else
+      _configs = store.get
+
   }
 
+  def configs: ConfigsStore = _configs
+
+  def disable(): Unit = getPluginLoader.disablePlugin(this)
 }

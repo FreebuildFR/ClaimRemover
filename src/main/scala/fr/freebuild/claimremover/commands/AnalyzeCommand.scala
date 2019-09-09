@@ -10,7 +10,7 @@ import scala.collection.mutable
 
 object AnalyzeCommand extends Command {
   override def execute(args: Array[String]): Boolean = {
-    val maxSize = ClaimRemoverPlugin.getConfig.getInt("MaxSizeClaim", 500)
+    val maxSize = ClaimRemoverPlugin.configs.config.claimSize.maxClaimSize
     val allRegions = RedProtect.get().getAPI.getAllRegions.asScala
 
     val excludedPlayers = allRegions.foldLeft(new mutable.HashSet[String]())((acc, region) => {
@@ -25,7 +25,7 @@ object AnalyzeCommand extends Command {
 
   private def canBeDeleted(region: Region, excludedPlayers: Set[String]): Boolean = {
     val leaders = region.getLeaders.asScala.map(_.getUUID)
-    val inactivity = ClaimRemoverPlugin.getConfig.getInt("InactivityMonths", 12) * 1000 * 60 * 60 * 24 * 30
+    val inactivity = ClaimRemoverPlugin.configs.config.inactivity.inactivityMonths * 1000 * 60 * 60 * 24 * 30
     (
       excludedPlayers.forall(!leaders.contains(_)) /*&&
       leaders.forall((uuid) => new Date().compareTo(PlayerUtils.getLastConnection(uuid)) > inactivity)*/

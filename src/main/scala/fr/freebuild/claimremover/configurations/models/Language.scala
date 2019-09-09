@@ -1,4 +1,4 @@
-package fr.freebuild.claimremover.configurations
+package fr.freebuild.claimremover.configurations.models
 
 case class InfoMessages(pluginReloading: String, pluginReloaded: String, affectedClaims: String)
 

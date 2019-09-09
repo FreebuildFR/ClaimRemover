@@ -5,16 +5,10 @@ import java.io.{InputStream, InputStreamReader}
 import better.files._
 import fr.freebuild.claimremover.ClaimRemoverPlugin
 import xyz.janboerman.scalaloader.plugin.ScalaPluginClassLoader
-import fr.freebuild.claimremover.utils.ColorUtils._
-import io.circe.yaml.parser
-import io.circe._
-import io.circe.generic.auto._
-import cats.syntax.either._
-import io.circe.yaml
 
 import scala.util.Try
 
-object ConfigLoader {
+object ConfigurationLoader {
 
   /**
    * Get resource from path
@@ -43,14 +37,9 @@ object ConfigLoader {
 
     if (!file.exists) {
       getResource(classLoader, path) match {
-        case Some(stream) => file.createIfNotExists(false, true).writeBytes(stream.bytes)
+        case Some(stream) => file.createIfNotExists(asDirectory = false, createParents = true).writeBytes(stream.bytes)
         case None => ClaimRemoverPlugin.getLogger.warning(s"File $path doesn't exist")
       }
     }
-  }
-
-  def loadResource(path: String): Json = {
-    val inputStream = new InputStreamReader(s"${ClaimRemoverPlugin.getDataFolder}/$path".toFile.newInputStream)
-    parser.parse(inputStream).leftMap(err => err: Error).valueOr(throw _)
   }
 }

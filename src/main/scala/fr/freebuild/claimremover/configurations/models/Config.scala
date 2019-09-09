@@ -1,4 +1,4 @@
-package fr.freebuild.claimremover.configurations
+package fr.freebuild.claimremover.configurations.models
 
 case class ClaimSize(enable: Boolean, maxClaimSize: Int)
 
