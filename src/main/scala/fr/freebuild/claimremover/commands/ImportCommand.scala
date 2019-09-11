@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender
 
 object ImportCommand extends Command {
 
-  override def execute(sender: CommandSender, args: Array[String]): Boolean = {
+  override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
     System.out.println("Import")
 
     val file = s"${ClaimRemoverPlugin.getDataFolder}/exports/regions".toFile

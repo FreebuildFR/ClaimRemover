@@ -10,7 +10,7 @@ import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 
 object AnalyzeCommand extends Command {
-  override def execute(sender: CommandSender, args: Array[String]): Boolean = {
+  override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
     val maxSize = ClaimRemoverPlugin.configs.config.claimSize.maxClaimSize
     val allRegions = RedProtect.get().getAPI.getAllRegions.asScala
 
