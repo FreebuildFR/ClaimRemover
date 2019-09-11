@@ -6,7 +6,7 @@ import br.net.fabiozumbi12.RedProtect.Bukkit.{RedProtect, Region}
 import fr.freebuild.claimremover.{ClaimRemoverPlugin, RegionsAnalysis}
 import org.bukkit.command.CommandSender
 
-import scala.collection.JavaConverters.asScalaSetConverter
+import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 
 object AnalyzeCommand extends Command {

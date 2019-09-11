@@ -1,6 +1,5 @@
 package fr.freebuild.claimremover
 
-import fr.freebuild.claimremover.configurations.ConfigurationLoader
 import fr.freebuild.claimremover.configurations.loaders._
 import fr.freebuild.claimremover.configurations.models._
 import xyz.janboerman.scalaloader.plugin.description.{Scala, ScalaVersion}
@@ -14,7 +13,7 @@ object ClaimRemoverPlugin
   var analysis = RegionsAnalysis(null)
 
   override def onEnable(): Unit = {
-    getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
+    // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
     getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
     this.loadResources()
   }
@@ -26,11 +25,11 @@ object ClaimRemoverPlugin
 
     val store = for {
       config <- {
-        ConfigurationLoader.saveResource(getClassLoader, "config.yml")
+        saveResource("config.yml", false)
         ConfigLoader(s"$getDataFolder/config.yml").load
       }
       language <- {
-        ConfigurationLoader.saveResource(getClassLoader, "language.yml")
+        saveResource("language.yml", false)
         LanguageLoader(s"$getDataFolder/language.yml").load
       }
     } yield ConfigsStore(config, language)
