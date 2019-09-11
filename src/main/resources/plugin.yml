@@ -8,7 +8,7 @@ main: fr.freebuild.claimremover.ClaimRemover
 commands:
   claimremover:
     usage: /claimremover analyze|delete|export|import|reload
-    alias: [crm]
+    aliases: [crm]
     permission: claimremover.commands
 permissions:
   claimremover.*:
