@@ -27,6 +27,7 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
           case "import" => ImportCommand.execute(sender, tail)
           case "delete" => DeleteCommand.execute(sender, tail)
           case "reload" => ReloadCommand.execute(sender, tail)
+          case "info" => InfoCommand.execute(sender, tail)
           case _ => false
         }
         case _ => false

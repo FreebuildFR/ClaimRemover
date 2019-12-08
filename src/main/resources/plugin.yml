@@ -4,7 +4,7 @@ author: Freebuild
 api-version: "1.13"
 softdepend: [RedProtect, LiteBans]
 description: Remover plugin for RedProtect Claim
-main: fr.freebuild.claimremover.ClaimRemover
+main: fr.freebuild.claimremover.ClaimRemoverPlugin
 commands:
   claimremover:
     usage: /claimremover analyze|delete|export|import|reload
