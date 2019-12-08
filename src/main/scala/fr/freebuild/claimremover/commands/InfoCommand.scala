@@ -1,7 +1,7 @@
 package fr.freebuild.claimremover.commands
 
 import fr.freebuild.claimremover.ClaimRemoverPlugin
-import fr.freebuild.claimremover.ClaimRemoverPlugin.configs
+import fr.freebuild.claimremover.ClaimRemoverPlugin.{analysis, configs}
 import fr.freebuild.claimremover.RegionsAnalysis
 import fr.freebuild.claimremover.utils.PlayerUtils
 import org.bukkit.command.CommandSender
@@ -13,10 +13,10 @@ object InfoCommand extends Command {
   val separator = "&3==================&7"
 
   override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
-    if (ClaimRemoverPlugin.analysis == null)
-      PlayerUtils.sendMessage(sender, configs.language.errorMessages.noAnalyze)
-    else
-      PlayerUtils.sendMessage(sender, getDisplayerAnalysis(ClaimRemoverPlugin.analysis))
+    analysis match {
+      case Some(analysis) => PlayerUtils.sendMessage(sender, getDisplayerAnalysis(analysis))
+      case None => PlayerUtils.sendMessage(sender, configs.language.errorMessages.noAnalyze)
+    }
     true
   }
 

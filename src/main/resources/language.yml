@@ -7,6 +7,8 @@ infoMessages:
   confirmDelete: "Etes-vous sur de vouloir supprimer %d claims ? (/claimremover delete confirm)"
   startAnalyze: "Lancement de l'analyse..."
   endAnalyze: "Analyse finie"
+  startExport: "Lancement de l'export..."
+  endExport: "Export fini"
 infoDisplay:
   analysisDate: "&6Nom/Date de l'analyse :&7 %s\n"
   playersNumber: "&6Nombre de joueurs affectés :&7 %d\n"

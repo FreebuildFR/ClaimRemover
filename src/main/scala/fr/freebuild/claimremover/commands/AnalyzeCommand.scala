@@ -26,10 +26,10 @@ object AnalyzeCommand extends Command {
       acc
     }).toSet
 
-    analysis = RegionsAnalysis(
+    analysis = Some(RegionsAnalysis(
       allRegions.filter(canBeDeleted(_, excludedPlayers)).toList,
       dateFormat.format(new Date())
-    )
+    ))
 
     PlayerUtils.sendMessage(sender, configs.language.infoMessages.endAnalyze)
     true

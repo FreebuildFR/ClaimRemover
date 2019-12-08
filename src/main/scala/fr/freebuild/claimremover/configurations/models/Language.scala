@@ -8,7 +8,9 @@ case class InfoMessages(
   claimsDeleted: String,
   confirmDelete: String,
   startAnalyze: String,
-  endAnalyze: String
+  endAnalyze: String,
+  startExport: String,
+  endExport: String
 )
 
 case class InfoDisplay(

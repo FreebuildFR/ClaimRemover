@@ -11,7 +11,7 @@ object ClaimRemoverPlugin
   extends ScalaPlugin(new ScalaPluginDescription("ClaimRemover", "0.0.1-SNAPSHOT")) {
 
   private var _configs: ConfigsStore = _
-  var analysis: RegionsAnalysis = _
+  var analysis: Option[RegionsAnalysis] = None
 
   override def onEnable(): Unit = {
     // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)

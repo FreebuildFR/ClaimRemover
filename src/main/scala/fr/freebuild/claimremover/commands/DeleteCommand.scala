@@ -8,16 +8,19 @@ import org.bukkit.command.CommandSender
 object DeleteCommand extends Command {
 
   override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
-    if (analysis == null) {
-      PlayerUtils.sendMessage(sender, configs.language.errorMessages.cantExecuteCommand)
-      PlayerUtils.sendMessage(sender, configs.language.errorMessages.noAnalyze)
-      false
-    } else {
-      args.headOption match {
-        case Some("confirm") => removeClaims(sender, analysis.regions)
-        case _ => PlayerUtils.sendMessage(sender, configs.language.infoMessages.confirmDelete.format(analysis.regions.size))
+    analysis match {
+      case Some(analysis) => {
+        args.headOption match {
+          case Some("confirm") => removeClaims(sender, analysis.regions)
+          case _ => PlayerUtils.sendMessage(sender, configs.language.infoMessages.confirmDelete.format(analysis.regions.size))
+        }
+        true
       }
-      true
+      case None => {
+        PlayerUtils.sendMessage(sender, configs.language.errorMessages.cantExecuteCommand)
+        PlayerUtils.sendMessage(sender, configs.language.errorMessages.noAnalyze)
+        false
+      }
     }
   }
 
