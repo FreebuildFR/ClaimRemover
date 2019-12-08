@@ -1,13 +1,9 @@
 package fr.freebuild.claimremover.csv
 
-import java.util.Date
-
 import better.files.File
 import com.github.tototoshi.csv.CSVWriter
 import fr.freebuild.claimremover.RegionsAnalysis
-import fr.freebuild.claimremover.csv.CSVRegionsExporter.header
 import fr.freebuild.claimremover.utils.FileUtils
-import org.bukkit.OfflinePlayer
 
 trait CSVExporter[T] {
   val fileName: String

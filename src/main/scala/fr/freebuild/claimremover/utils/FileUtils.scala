@@ -1,8 +1,5 @@
 package fr.freebuild.claimremover.utils
 
-import java.text.SimpleDateFormat
-import java.util.Date
-
 import better.files.File
 import better.files._
 import fr.freebuild.claimremover.ClaimRemoverPlugin

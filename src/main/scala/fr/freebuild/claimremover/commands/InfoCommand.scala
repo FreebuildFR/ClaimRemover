@@ -1,6 +1,5 @@
 package fr.freebuild.claimremover.commands
 
-import br.net.fabiozumbi12.RedProtect.Bukkit.{RedProtect, Region}
 import fr.freebuild.claimremover.ClaimRemoverPlugin
 import fr.freebuild.claimremover.ClaimRemoverPlugin.configs
 import fr.freebuild.claimremover.RegionsAnalysis
