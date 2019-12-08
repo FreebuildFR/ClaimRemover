@@ -27,3 +27,4 @@ commands:
     help: "&c/claimremover [help]&6 - Affiche l'aide"
     reload: "&c/claimremover reload&6 - Permet de recharger le plugin"
     version: "&c/claimremover version&6 - Affiche la version du plugin"
+    import: "&c/claimremover import <analysis>&6 - Import une analyse"

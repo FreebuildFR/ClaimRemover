@@ -32,7 +32,8 @@ case class HelpCommand(
   usage: String,
   help: String,
   reload: String,
-  version: String
+  version: String,
+  `import`: String
 )
 
 case class Commands(

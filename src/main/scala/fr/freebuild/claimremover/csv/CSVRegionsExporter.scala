@@ -16,38 +16,28 @@ object CSVRegionsExporter extends CSVExporter[RegionsAnalysis] {
 
   override def exportCSV(file: File, analysis: RegionsAnalysis): Unit = {
     val writer = initWriter(file)
-    ClaimRemoverPlugin.analysis.regions.foreach(reg => writer.writeRow(serializeRegion(reg)))
+    analysis.regions.foreach(reg => writer.writeRow(serializeRegion(reg)))
     writer.close()
   }
 
-  override def importCSV(file: File): RegionsAnalysis = {
+  override def importCSV(file: File, analysisName: String): RegionsAnalysis = {
     val reader =  CSVReader.open(file.toJava)
     val lines = reader.allWithHeaders()
+    val regions = lines.flatMap(deserializeRegion)
 
-    /*
-    val regions = lines.flatMap(line => Try(new Region(
-        line("Name"),
-        deserializeLocation(line("StartLocation")),
-        deserializeLocation(line("EndLocation")),
-        line("World")
-      )).recoverWith(handleErrors(serializeMap(line))).toOption
-    */
-    val regions = lines.map(line =>
-      (for {
-        name <- Try(line("Name"))
-        startLocation <- deserializeLocation(line("StartLocation"))
-        endLocation <- deserializeLocation(line("EndLocation"))
-        world <- Try(line("World"))
-      } yield new Region(name, startLocation, endLocation, world)).recoverWith(handleErrors(serializeMap(line))).toOption
-    )
-
-    RegionsAnalysis(regions.map(region => region.get), file.name)
+    RegionsAnalysis(regions, analysisName)
   }
 
+  private def deserializeRegion(line: Map[String, String]): Option[Region] = {
+    (for {
+      name <- Try(line("Name"))
+      startLocation <- deserializeLocation(line("StartLocation"))
+      endLocation <- deserializeLocation(line("EndLocation"))
+      world <- Try(line("World"))
+    } yield new Region(name, startLocation, endLocation, world)).recoverWith(handleErrors(serializeMap(line))).toOption
+  }
 
   private def serializeRegion(region: Region): List[String] = {
-    println(serializeLocation(region.getMinLocation))
-    println(deserializeLocation(serializeLocation(region.getMinLocation)))
     List(
       region.getName,
       region.getWorld,
@@ -73,7 +63,7 @@ object CSVRegionsExporter extends CSVExporter[RegionsAnalysis] {
 
   private def handleErrors(line: String): PartialFunction[Throwable, Try[Region]] = {
     case e =>
-      ClaimRemoverPlugin.getLogger.warning(s"Can't parsine line '$line'")
+      ClaimRemoverPlugin.getLogger.warning(s"Can't parse line '$line'")
       Failure(e)
   }
 

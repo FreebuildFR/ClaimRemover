@@ -10,7 +10,7 @@ trait CSVExporter[T] {
   private[csv] val header: List[String]
 
   def exportCSV(file: File, analysis: RegionsAnalysis)
-  def importCSV(file: File): T
+  def importCSV(file: File, analysisName: String): T
 
   def loadFile(analysisName: String): File = FileUtils.loadFile(FileUtils.buildPath(fileName, analysisName), create = true)
   def initWriter(file: File): CSVWriter = {

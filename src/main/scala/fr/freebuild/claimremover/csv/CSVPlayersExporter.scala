@@ -20,5 +20,5 @@ object CSVPlayersExporter extends CSVExporter[List[String]] {
 
   }
 
-  override def importCSV(file: File): List[String] = ???
+  override def importCSV(file: File, analysisName: String): List[String] = ???
 }
