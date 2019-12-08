@@ -14,4 +14,3 @@ case class LanguageLoader(path: String) extends YamlLoader[Language] {
   override def load: Option[Language] =
     loadFromPath(path).flatMap(_.as[Language].toTry).recoverWith(handleErrors(path)).toOption
 }
-

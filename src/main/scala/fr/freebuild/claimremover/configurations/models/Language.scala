@@ -1,13 +1,49 @@
 package fr.freebuild.claimremover.configurations.models
 
-case class InfoMessages(pluginReloading: String, pluginReloaded: String, affectedClaims: String)
+case class InfoMessages(
+  pluginReloading: String,
+  pluginReloaded: String,
+  affectedClaims: String,
+  claimsToDelete: String,
+  claimsDeleted: String,
+  confirmDelete: String,
+  startAnalyze: String,
+  endAnalyze: String
+)
 
-case class ErrorMessages(permissionNotAllowed: String, invalidCommand: String, playerOnly: String, noAnalyze: String)
+case class InfoDisplay(
+  analysisDate: String,
+  playersNumber: String,
+  claimsNumber: String,
+  worldDetails: String
+)
 
-case class HelpCommand(usage: String, help: String, reload: String, version: String)
-case class Commands(seeHelp: String, helpCommand: HelpCommand)
+case class ErrorMessages(
+  permissionNotAllowed: String,
+  invalidCommand: String,
+  cantExecuteCommand: String,
+  playerOnly: String,
+  noAnalyze: String
+)
+
+case class HelpCommand(
+  usage: String,
+  help: String,
+  reload: String,
+  version: String
+)
+
+case class Commands(
+  seeHelp: String,
+  helpCommand: HelpCommand
+)
 
 /**
  * Language file
  */
-case class Language(infoMessages: InfoMessages, errorMessages: ErrorMessages, commands: Commands)
+case class Language(
+  infoMessages: InfoMessages,
+  infoDisplay: InfoDisplay,
+  errorMessages: ErrorMessages,
+  commands: Commands
+)

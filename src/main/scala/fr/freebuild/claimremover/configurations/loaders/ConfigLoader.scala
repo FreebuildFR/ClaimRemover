@@ -14,4 +14,3 @@ case class ConfigLoader(path: String) extends YamlLoader[Config] {
   override def load: Option[Config] =
     loadFromPath(path).flatMap(_.as[Config].toTry).recoverWith(handleErrors(path)).toOption
 }
-

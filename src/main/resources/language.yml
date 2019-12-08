@@ -2,9 +2,20 @@ infoMessages:
   pluginReloading: "Le plugin est en train de recharger..."
   pluginReloaded: "Le plugin a fini de recharger."
   affectedClaims: "Claims affectés: %d/%d"
+  claimsToDelete: "%d claims vont être supprimés"
+  claimsDeleted: "%d claims sur %d supprimés"
+  confirmDelete: "Etes-vous sur de vouloir supprimer %d claims ? (/claimremover delete confirm)"
+  startAnalyze: "Lancement de l'analyse..."
+  endAnalyze: "Analyse finie"
+infoDisplay:
+  analysisDate: "&6Nom/Date de l'analyse :&7 %s\n"
+  playersNumber: "&6Nombre de joueurs affectés :&7 %d\n"
+  claimsNumber: "&6Nombre de claims affectés :&7 %d\n"
+  worldDetails: "&6Détail par monde :&7\n"
 errorMessages:
   permissionNotAllowed: "&cVous n'êtes pas autorisé à faire cette action"
   invalidCommand: "&cCette commande n'est pas valide : "
+  cantExecuteCommand: "&cImpossible d'exécuter cette commande"
   playerOnly: "&cCette commande peut uniquement être exécutée par un joueur"
   noAnalyze: "&cAucune analyze n'a été faite"
 commands:
