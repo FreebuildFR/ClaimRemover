@@ -2,6 +2,7 @@ package fr.freebuild.claimremover.csv
 
 import better.files.File
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region
+import br.net.fabiozumbi12.RedProtect.Core.region.PlayerRegion
 import com.github.tototoshi.csv.CSVReader
 import fr.freebuild.claimremover.{ClaimRemoverPlugin, RegionsAnalysis}
 import org.bukkit.Location
@@ -34,7 +35,14 @@ object CSVRegionsExporter extends CSVExporter[RegionsAnalysis] {
       startLocation <- deserializeLocation(line("StartLocation"))
       endLocation <- deserializeLocation(line("EndLocation"))
       world <- Try(line("World"))
-    } yield new Region(name, startLocation, endLocation, world)).recoverWith(handleErrors(serializeMap(line))).toOption
+      leaders <- Try(line("Leaders"))
+      admins <- Try(line("Admins"))
+    } yield {
+      val region = new Region(name, startLocation, endLocation, world)
+      region.setLeaders(deserializeListPlayers(leaders).asJava)
+      region.setAdmins(deserializeListPlayers(admins).asJava)
+      region
+    }).recoverWith(handleErrors(serializeMap(line))).toOption
   }
 
   private def serializeRegion(region: Region): List[String] = {
@@ -61,9 +69,21 @@ object CSVRegionsExporter extends CSVExporter[RegionsAnalysis] {
     Try(Location.deserialize(locationMap))
   }
 
+  private def deserializeListPlayers(line: String): Set[PlayerRegion] = {
+    if (line.length > 0) {
+      line.split(',').map(player => {
+        val info = player.split('@')
+        new PlayerRegion(info(0), info(1))
+      }).toSet
+    } else {
+      Set.empty
+    }
+  }
+
   private def handleErrors(line: String): PartialFunction[Throwable, Try[Region]] = {
     case e =>
       ClaimRemoverPlugin.getLogger.warning(s"Can't parse line '$line'")
+      println(e)
       Failure(e)
   }
 
