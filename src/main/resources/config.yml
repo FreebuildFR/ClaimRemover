@@ -8,11 +8,30 @@ claimSize:
 inactivity:
   # If true it will delete claim that are older than a specific period
   enable: true
-  # Period in months to delete claims
-  inactivityMonths: 12
+  # Period of inactivity
+  period:
+    # Years
+    years: 0
+    # Months
+    months: 12
+    # Days
+    days: 0
+    # Hours
+    hours: 0
+    # Minutes
+    minutes: 0
 
 # Config for claim removal affected by Bans
 # Needed: LiteBans
 bans:
-  # If true it will delete also claims of bannned players
+  # If true it will delete also claims of banned players
   enable: false
+
+# Config for claim removal affected by PermissionsEx Groups
+# Needed: PermissionsEx
+permissions:
+  # If true it will ignore claims of players with listed group
+  enable: false
+
+  # List of group to ignore
+  ignoreGroups: []
