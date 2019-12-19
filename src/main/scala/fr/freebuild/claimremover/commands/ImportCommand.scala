@@ -16,6 +16,7 @@ object ImportCommand extends Command {
         Try {
           ClaimRemoverPlugin.analysis = Some(CSVHandler.importAnalysis(head))
         }.recoverWith(FileUtils.handleErrors(sender))
+        PlayerUtils.sendMessage(sender, configs.language.infoMessages.endImport)
         true
       }
       case _ => {

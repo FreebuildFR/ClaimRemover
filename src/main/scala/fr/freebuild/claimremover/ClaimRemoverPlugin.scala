@@ -5,6 +5,7 @@ import fr.freebuild.claimremover.configurations.models._
 import xyz.janboerman.scalaloader.plugin.description.{Scala, ScalaVersion}
 import xyz.janboerman.scalaloader.plugin.{ScalaPlugin, ScalaPluginDescription}
 import better.files._
+import fr.freebuild.claimremover.utils.PlayerUtils
 
 @Scala(version = ScalaVersion.v2_13_0)
 object ClaimRemoverPlugin
@@ -15,8 +16,13 @@ object ClaimRemoverPlugin
 
   override def onEnable(): Unit = {
     // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
-    getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
-    this.loadResources()
+    if (!getServer.getPluginManager.getPlugin("RedProtect").isEnabled) {
+      PlayerUtils.sendMessage(getServer.getConsoleSender, configs.language.errorMessages.redprotectMissing)
+      this.disable()
+    } else {
+      getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
+      this.loadResources()
+    }
   }
 
   def configs: ConfigsStore = _configs

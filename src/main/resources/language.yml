@@ -9,12 +9,14 @@ infoMessages:
   endAnalyze: "Analyse finie"
   startExport: "Lancement de l'export..."
   endExport: "Export fini"
+  endImport: "Import fini"
 infoDisplay:
   analysisDate: "&6Nom/Date de l'analyse :&7 %s\n"
   playersNumber: "&6Nombre de joueurs affectés :&7 %d\n"
   claimsNumber: "&6Nombre de claims affectés :&7 %d\n"
   worldDetails: "&6Détail par monde :&7\n"
 errorMessages:
+  redprotectMissing: "&cLe plugin RedProtect n'est pas présent ou est désactivé"
   permissionNotAllowed: "&cVous n'êtes pas autorisé à faire cette action"
   invalidCommand: "&cCette commande n'est pas valide : "
   cantExecuteCommand: "&cImpossible d'exécuter cette commande"

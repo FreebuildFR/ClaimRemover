@@ -10,7 +10,8 @@ case class InfoMessages(
   startAnalyze: String,
   endAnalyze: String,
   startExport: String,
-  endExport: String
+  endExport: String,
+  endImport: String
 )
 
 case class InfoDisplay(
@@ -21,6 +22,7 @@ case class InfoDisplay(
 )
 
 case class ErrorMessages(
+  redprotectMissing: String,
   permissionNotAllowed: String,
   invalidCommand: String,
   cantExecuteCommand: String,
