@@ -16,7 +16,8 @@ infoDisplay:
   claimsNumber: "&6Nombre de claims affectés :&7 %d\n"
   worldDetails: "&6Détail par monde :&7\n"
 errorMessages:
-  redprotectMissing: "&cLe plugin RedProtect n'est pas présent ou est désactivé"
+  pluginMissing: "&cLe plugin %s n'est pas présent ou est désactivé"
+  disablePermissionCheck: "Désactivation de la vérification des permissions"
   permissionNotAllowed: "&cVous n'êtes pas autorisé à faire cette action"
   invalidCommand: "&cCette commande n'est pas valide : "
   cantExecuteCommand: "&cImpossible d'exécuter cette commande"

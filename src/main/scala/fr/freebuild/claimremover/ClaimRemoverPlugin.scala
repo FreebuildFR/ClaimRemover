@@ -16,13 +16,18 @@ object ClaimRemoverPlugin
 
   override def onEnable(): Unit = {
     // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
-    if (!getServer.getPluginManager.getPlugin("RedProtect").isEnabled) {
-      PlayerUtils.sendMessage(getServer.getConsoleSender, configs.language.errorMessages.redprotectMissing)
-      this.disable()
+    if (isPluginDisabled("RedProtect")) {
+      PlayerUtils.sendMessage(getServer.getConsoleSender, configs.language.errorMessages.pluginMissing.format("RedProtect"))
+      disable()
     } else {
       getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
-      this.loadResources()
+      loadResources()
+      checkOptionalPlugins()
     }
+  }
+
+  override def onDisable(): Unit = {
+    analysis = None
   }
 
   def configs: ConfigsStore = _configs
@@ -57,7 +62,40 @@ object ClaimRemoverPlugin
 
   }
 
+  /**
+   * Save one resource from it's path
+   *
+   * @param path Path to resource
+   */
   private def saveResource(path: String): Unit =
     if (!s"$getDataFolder/$path".toFile.exists)
       saveResource(path, false)
+
+  /**
+   * Check that optional plugins are active or not to disable functionalities
+   */
+  private def checkOptionalPlugins(): Unit = {
+    val errorMessages = configs.language.errorMessages
+    if (configs.config.permissions.enable && isPluginDisabled("PermissionsEx")) {
+      PlayerUtils.sendMessage(getServer.getConsoleSender,
+        f"${errorMessages.pluginMissing.format("PermissionsEx")}\n${errorMessages.disablePermissionCheck}")
+      configs.config.permissions.enable = false
+    }
+
+
+  }
+
+  /**
+   * Define if another plugin exists and is enabled
+   *
+   * @param pluginName Name of plugin to verify
+   * @return if plugin is enabled
+   */
+  private def isPluginDisabled(pluginName: String): Boolean =
+    Option(getServer.getPluginManager.getPlugin(pluginName)).flatMap(plugin =>
+      if (plugin.isEnabled)
+        Some(plugin)
+      else
+        None
+    ).isEmpty
 }

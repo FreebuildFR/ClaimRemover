@@ -22,7 +22,8 @@ case class InfoDisplay(
 )
 
 case class ErrorMessages(
-  redprotectMissing: String,
+  pluginMissing: String,
+  disablePermissionCheck: String,
   permissionNotAllowed: String,
   invalidCommand: String,
   cantExecuteCommand: String,

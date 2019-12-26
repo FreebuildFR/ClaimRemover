@@ -25,7 +25,7 @@ case class Inactivity(enable: Boolean, period: Period)
 
 case class Bans(enable: Boolean)
 
-case class Permissions(enable: Boolean, ignoreGroups: List[String])
+case class Permissions(var enable: Boolean, ignoreGroups: List[String])
 
 /**
  * Config file
