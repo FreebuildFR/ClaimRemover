@@ -9,6 +9,7 @@ case class InfoMessages(
   confirmDelete: String,
   startAnalyze: String,
   endAnalyze: String,
+  analyzeRemoved: String,
   startExport: String,
   endExport: String,
   endImport: String

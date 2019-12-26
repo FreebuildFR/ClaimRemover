@@ -39,7 +39,7 @@ object InfoCommand extends Command {
     analysis.regions.foldLeft(Map[String, Int]()){
       (acc, region) => acc + (region.getWorld -> (acc.getOrElse(region.getWorld, 0) + 1))
     }.foreach {
-      case (world, quantity) => sb ++= s"- &9${world} : &7${quantity}\n"
+      case (world, quantity) => sb ++= s"- &f${world} : &7${quantity}\n"
     }
     sb ++= separator
     sb.toString

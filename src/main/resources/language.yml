@@ -7,6 +7,7 @@ infoMessages:
   confirmDelete: "Etes-vous sur de vouloir supprimer %d claims ? (/claimremover delete confirm)"
   startAnalyze: "Lancement de l'analyse..."
   endAnalyze: "Analyse finie"
+  analyzeRemoved: "Analyse retirée du cache"
   startExport: "Lancement de l'export..."
   endExport: "Export fini"
   endImport: "Import fini"
