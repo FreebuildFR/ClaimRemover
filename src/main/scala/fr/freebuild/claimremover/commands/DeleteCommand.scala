@@ -35,11 +35,12 @@ object DeleteCommand extends Command {
     val gap = Math.round(regions.size / 10)
     regions.zipWithIndex.foreach {
       case (region, index) => {
-        if ((index + 1) % gap == 0) {
+        if (gap > 0 && (index + 1) % gap == 0) {
           PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(index + 1, regions.size))
         }
         RedProtect.get().getAPI.removeRegion(region)
       }
     }
+    PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(regions.size, regions.size))
   }
 }
