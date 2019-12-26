@@ -9,7 +9,7 @@ import scala.jdk.CollectionConverters._
 import better.files._
 
 object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
-  private val mainCommands = Seq("analyze", "clear", "export", "import", "info", "delete", "reload", "version")
+  private val mainCommands = Seq("analyze", "config", "clear", "export", "import", "info", "delete", "reload", "version")
   private val deleteSubCommands = Seq("confirm")
 
   /**
@@ -24,7 +24,10 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
     override def onCommand(sender: CommandSender, command: Command, label: String, args: Array[String]): Boolean = {
       args.toSeq match {
         case head +: tail => head match {
-          case "analyze" => AnalyzeCommand.execute(sender, tail)
+          case "analyze" => {
+            AnalyzeCommand.execute(sender, tail)
+            InfoCommand.execute(sender, tail)
+          }
           case "export" => ExportCommand.execute(sender, tail)
           case "import" => ImportCommand.execute(sender, tail)
           case "delete" => DeleteCommand.execute(sender, tail)
