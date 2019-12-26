@@ -2,7 +2,7 @@ package fr.freebuild.claimremover
 
 import java.util
 
-import fr.freebuild.claimremover.commands.{AnalyzeCommand, ClearCommand, DeleteCommand, ExportCommand, ImportCommand, InfoCommand, ReloadCommand, VersionCommand}
+import fr.freebuild.claimremover.commands.{AnalyzeCommand, ClearCommand, ConfigCommand, DeleteCommand, ExportCommand, ImportCommand, InfoCommand, ReloadCommand, VersionCommand}
 import org.bukkit.command.{Command, CommandExecutor, CommandSender, TabCompleter}
 
 import scala.jdk.CollectionConverters._
@@ -31,6 +31,7 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
           case "reload" => ReloadCommand.execute(sender, tail)
           case "info" => InfoCommand.execute(sender, tail)
           case "clear" => ClearCommand.execute(sender, tail)
+          case "config" => ConfigCommand.execute(sender, tail)
           case "version" => VersionCommand.execute(sender, tail)
           case _ => false
         }
