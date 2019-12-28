@@ -16,12 +16,12 @@ object ClaimRemoverPlugin
 
   override def onEnable(): Unit = {
     // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
+    getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
+    loadResources()
     if (isPluginDisabled("RedProtect")) {
       PlayerUtils.sendMessage(getServer.getConsoleSender, configs.language.errorMessages.pluginMissing.format("RedProtect"))
       disable()
     } else {
-      getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
-      loadResources()
       checkOptionalPlugins()
     }
   }

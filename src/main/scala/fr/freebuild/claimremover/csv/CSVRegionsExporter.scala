@@ -10,7 +10,7 @@ import org.bukkit.Location
 import scala.jdk.CollectionConverters._
 import scala.util.{Failure, Try}
 
-object CSVRegionsExporter extends CSVExporter[RegionsAnalysis] {
+object CSVRegionsExporter extends CSVExporter[RegionsAnalysis, RegionsAnalysis] {
   override val fileName: String = "regions.csv"
   override val header: List[String] = List("Name", "World", "Size", "StartLocation", "EndLocation", "Leaders", "Admins")
   private val keyValueRegex = "(.+)=(.+)".r
