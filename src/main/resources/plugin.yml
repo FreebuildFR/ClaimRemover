@@ -3,30 +3,54 @@ version: 0.0.1-SNAPSHOT
 author: Freebuild
 api-version: "1.13"
 softdepend: [RedProtect, LiteBans, PermissionsEx]
-description: Remover plugin for RedProtect Claim
+description: Remover plugin for RedProtect Claims
 main: fr.freebuild.claimremover.ClaimRemoverPlugin
 commands:
   claimremover:
-    usage: /claimremover analyze|delete|export|import|reload
-    aliases: [crm]
-    permission: claimremover.commands
+    usage: "Usage:\n
+/<command> analyze - Make an analyze\n
+/<command> clear - Remove current analyze from cache\n
+/<command> config - Display config\n
+/<command> delete [confirm] - Remove claims analyzed\n
+/<command> export - Export analyze\n
+/<command> import <name> - Import analyze\n
+/<command> info - Display current analyze\n
+/<command> reload - Reload the plugin\n
+/<command> version - Display plugin version"
+    aliases: [crm, cremover]
 permissions:
   claimremover.*:
     description: Can use all feature of the plugin
+    default: op
     children:
      claimremover.commands.*: true
   claimremover.commands.*:
     description: Can use all commands
     children:
       claimremover.commands.analyze: true
+      claimremover.commands.clear: true
+      claimremover.commands.config: true
       claimremover.commands.delete: true
       claimremover.commands.export: true
       claimremover.commands.import: true
+      claimremover.commands.info: true
+      claimremover.commands.reload: true
+      claimremover.commands.version: true
   claimremover.commands.analyze:
     description: Can analyze all claims to delete
+  claimremover.commands.clear:
+    description: Can clear current analyze
+  claimremover.commands.config:
+    description: Can see current config
   claimremover.commands.delete:
     description: Can delete all claims analyzed
   claimremover.commands.export:
     description: Can export analyze to a csv file
   claimremover.commands.import:
     description: Can import analyze from a csv file
+  claimremover.commands.info:
+    description: Can see info of current analyze
+  claimremover.commands.reload:
+    description: Can reload the plugin
+  claimremover.commands.version:
+    description: Can see version of plugin

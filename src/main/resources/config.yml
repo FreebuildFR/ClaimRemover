@@ -3,6 +3,8 @@ claimSize:
   enable: true
   # Maximum size of a claim to define if it can be deleted
   maxClaimSize: 5000
+  # Maximum size of all claim cumulated
+  totalClaimSize: 20000
 
 # Config for clam removal affect by player inactivity
 inactivity:
