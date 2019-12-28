@@ -1,5 +1,5 @@
 name: ClaimRemover
-version: 0.0.1-SNAPSHOT
+version: 0.0.1
 author: Freebuild
 api-version: "1.13"
 softdepend: [RedProtect, LiteBans, PermissionsEx]

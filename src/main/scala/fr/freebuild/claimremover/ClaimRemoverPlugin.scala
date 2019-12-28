@@ -9,7 +9,7 @@ import fr.freebuild.claimremover.utils.PlayerUtils
 
 @Scala(version = ScalaVersion.v2_13_0)
 object ClaimRemoverPlugin
-  extends ScalaPlugin(new ScalaPluginDescription("ClaimRemover", "0.0.1-SNAPSHOT")) {
+  extends ScalaPlugin(new ScalaPluginDescription("ClaimRemover", "0.0.1")) {
 
   private var _configs: ConfigsStore = _
   var analysis: Option[RegionsAnalysis] = None
