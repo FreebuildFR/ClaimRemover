@@ -2,7 +2,7 @@ package fr.freebuild.claimremover.configurations.models
 
 case class ClaimSize(enable: Boolean, maxClaimSize: Int, totalClaimSize: Int)
 
-case class Period(years: Int, months: Int, days: Int, hours: Int, minutes: Int)
+case class Period(years: Long, months: Long, days: Long, hours: Long, minutes: Long)
 
 object Period {
   /**
@@ -12,11 +12,11 @@ object Period {
    * @return Time in milliseconds
    */
   def getInactivity(period: Period): Long = {
-    val years = period.years * 365  * 24 * 60 * 60 * 1000
-    val months = period.months * 30 * 24 * 60 * 60 * 1000
-    val days = period.days * 24 * 60 * 60 * 1000
-    val hours = period.hours * 60 * 60 * 1000
-    val minutes = period.minutes * 60 * 1000
+    val years: Long = period.years * 365  * 24 * 60 * 60 * 1000
+    val months: Long = period.months * 30 * 24 * 60 * 60 * 1000
+    val days: Long = period.days * 24 * 60 * 60 * 1000
+    val hours: Long = period.hours * 60 * 60 * 1000
+    val minutes: Long = period.minutes * 60 * 1000
     years + months + days + hours + minutes
   }
 }
