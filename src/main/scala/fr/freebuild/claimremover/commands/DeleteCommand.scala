@@ -5,6 +5,8 @@ import fr.freebuild.claimremover.ClaimRemoverPlugin.{analysis, configs}
 import fr.freebuild.claimremover.utils.PlayerUtils
 import org.bukkit.command.CommandSender
 
+import scala.concurrent.{ExecutionContext, Future, blocking}
+
 object DeleteCommand extends Command {
 
   override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
@@ -31,16 +33,20 @@ object DeleteCommand extends Command {
    * @param regions Regions analyzed
    */
   private def removeClaims(sender: CommandSender, regions: List[Region]): Unit = {
-    PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsToDelete.format(regions.size))
-    val gap = Math.round(regions.size / 10)
-    regions.zipWithIndex.foreach {
-      case (region, index) => {
-        if (gap > 0 && (index + 1) % gap == 0) {
-          PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(index + 1, regions.size))
+    Future {
+      blocking {
+        PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsToDelete.format(regions.size))
+        val gap = Math.round(regions.size / 10)
+        regions.zipWithIndex.foreach {
+          case (region, index) => {
+            if (gap > 0 && (index + 1) % gap == 0) {
+              PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(index + 1, regions.size))
+            }
+            RedProtect.get().getAPI.removeRegion(region)
+          }
         }
-        RedProtect.get().getAPI.removeRegion(region)
+        PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(regions.size, regions.size))
       }
-    }
-    PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(regions.size, regions.size))
+    }(ExecutionContext.global)
   }
 }

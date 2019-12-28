@@ -14,14 +14,32 @@ import ru.tehkode.permissions.bukkit.PermissionsEx
 
 import scala.jdk.CollectionConverters._
 import scala.collection.mutable
+import scala.concurrent.{ExecutionContext, Future, blocking}
 
 object AnalyzeCommand extends Command {
   private val dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss")
 
   override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
-    PlayerUtils.sendMessage(sender, configs.language.infoMessages.startAnalyze)
+    Future {
+      blocking {
+        PlayerUtils.sendMessage(sender, configs.language.infoMessages.startAnalyze)
+        analysis = analyzeClaims(RedProtect.get().getAPI.getAllRegions.asScala)
+        PlayerUtils.sendMessage(sender, configs.language.infoMessages.endAnalyze)
+        InfoCommand.execute(sender, Seq.empty)
+      }
+    }(ExecutionContext.global)
+
+    true
+  }
+
+  /**
+   * Analyze RedProtect claims
+   *
+   * @param allRegions Regions to analyze
+   * @return Return an option of analysis
+   */
+  private def analyzeClaims(allRegions: mutable.Set[Region]): Option[RegionsAnalysis] = {
     val maxSize = configs.config.claimSize.maxClaimSize
-    val allRegions = RedProtect.get().getAPI.getAllRegions.asScala
 
     val excludedPlayers = allRegions.foldLeft(new mutable.HashSet[String]())((acc, region) => {
       if (region.getArea > maxSize) {
@@ -30,13 +48,10 @@ object AnalyzeCommand extends Command {
       acc
     }).toSet
 
-    analysis = Some(RegionsAnalysis(
+    Some(RegionsAnalysis(
       allRegions.filter(canBeDeleted(_, excludedPlayers)).toList,
       dateFormat.format(new Date())
     ))
-
-    PlayerUtils.sendMessage(sender, configs.language.infoMessages.endAnalyze)
-    true
   }
 
   /**
@@ -49,11 +64,7 @@ object AnalyzeCommand extends Command {
   private def canBeDeleted(region: Region, excludedPlayers: Set[String]): Boolean = {
     val leaders = region.getLeaders.asScala.map(_.getUUID).toSet
     val inactivity = Period.getInactivity(configs.config.inactivity.period)
-    (
-      isNotExcluded(leaders, excludedPlayers) &&
-      isPermissionGroupsIgnored(leaders) &&
-      isInactive(leaders, inactivity)
-    )
+    isNotExcluded(leaders, excludedPlayers) && isPermissionGroupsIgnored(leaders) && isInactive(leaders, inactivity)
   }
 
   /**
@@ -85,7 +96,7 @@ object AnalyzeCommand extends Command {
    */
   private def isInactive(leaders: Set[String], inactivity: Long): Boolean =
     !configs.config.inactivity.enable ||
-    leaders.forall((uuid) => new Date().getTime - PlayerUtils.getLastConnection(uuid).getTime > inactivity)
+    leaders.forall((uuid) => new Date().getTime - inactivity > PlayerUtils.getLastConnection(uuid).getTime)
 
   /**
    * Define if all leaders are banned
