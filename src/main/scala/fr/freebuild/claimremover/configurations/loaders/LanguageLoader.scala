@@ -1,8 +1,7 @@
 package fr.freebuild.claimremover.configurations.loaders
 
-import io.circe.generic.auto._
-
 import fr.freebuild.claimremover.configurations.models.Language
+import io.circe.generic.auto._
 
 case class LanguageLoader(path: String) extends YamlLoader[Language] {
 

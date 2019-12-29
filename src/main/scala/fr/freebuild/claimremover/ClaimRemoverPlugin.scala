@@ -1,11 +1,11 @@
 package fr.freebuild.claimremover
 
+import better.files._
 import fr.freebuild.claimremover.configurations.loaders._
 import fr.freebuild.claimremover.configurations.models._
+import fr.freebuild.claimremover.utils.PlayerUtils
 import xyz.janboerman.scalaloader.plugin.description.{Scala, ScalaVersion}
 import xyz.janboerman.scalaloader.plugin.{ScalaPlugin, ScalaPluginDescription}
-import better.files._
-import fr.freebuild.claimremover.utils.PlayerUtils
 
 @Scala(version = ScalaVersion.v2_13_0)
 object ClaimRemoverPlugin
@@ -15,7 +15,6 @@ object ClaimRemoverPlugin
   var analysis: Option[RegionsAnalysis] = None
 
   override def onEnable(): Unit = {
-    // getServer.getPluginManager.registerEvents(PlayerJoinListener, this)
     getCommand("claimremover").setExecutor(ClaimRemoverCommandExecutor)
     loadResources()
     if (isPluginDisabled("RedProtect")) {
@@ -43,7 +42,6 @@ object ClaimRemoverPlugin
    * Load all resources needed
    */
   private def loadResources(): Unit = {
-
     val store = for {
       config <- {
         saveResource("config.yml")

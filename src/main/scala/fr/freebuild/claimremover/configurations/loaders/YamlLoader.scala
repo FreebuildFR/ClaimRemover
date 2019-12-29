@@ -1,12 +1,13 @@
 package fr.freebuild.claimremover.configurations.loaders
 
 import java.io.InputStreamReader
-import io.circe.yaml.parser
-import io.circe.Json
-import better.files._
-import scala.util.{Failure, Try}
 
+import better.files._
 import fr.freebuild.claimremover.ClaimRemoverPlugin
+import io.circe.Json
+import io.circe.yaml.parser
+
+import scala.util.{Failure, Try}
 
 trait YamlLoader[T] {
 
@@ -30,6 +31,15 @@ trait YamlLoader[T] {
     } yield json
 
   /**
+   * Get the InputStream of wanted file
+   *
+   * @param path Path to file
+   * @return A try of file InputStream
+   */
+  private def getStream(path: String): Try[InputStreamReader] =
+    Try(new InputStreamReader(s"$path".toFile.newInputStream))
+
+  /**
    * PartialFunction that handle load errors of file
    *
    * @param path Path to file
@@ -41,13 +51,4 @@ trait YamlLoader[T] {
       e.printStackTrace()
       Failure(e)
   }
-
-  /**
-   * Get the InputStream of wanted file
-   *
-   * @param path Path to file
-   * @return A try of file InputStream
-   */
-  private def getStream(path: String): Try[InputStreamReader] =
-    Try(new InputStreamReader(s"$path".toFile.newInputStream))
 }

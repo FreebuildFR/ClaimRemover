@@ -3,8 +3,7 @@ package fr.freebuild.claimremover.utils
 import java.io.FileNotFoundException
 import java.nio.file.FileAlreadyExistsException
 
-import better.files.File
-import better.files._
+import better.files.{File, _}
 import fr.freebuild.claimremover.ClaimRemoverPlugin
 import org.bukkit.command.CommandSender
 
@@ -14,7 +13,7 @@ object FileUtils {
   /**
    * Build the path to file from filename and date
    *
-   * @param fileName Name of file
+   * @param fileName     Name of file
    * @param analysisName Name of analysis to use to build the directory
    * @return The path built
    */
@@ -23,9 +22,9 @@ object FileUtils {
   /**
    * Load file from path
    *
-   * @param path Path to file
-   * @param create Define if the path must be created when load it
-   * @param errorIfExists Define if the existence of the file must be an error
+   * @param path             Path to file
+   * @param create           Define if the path must be created when load it
+   * @param errorIfExists    Define if the existence of the file must be an error
    * @param errorIfNotExists Define if the absence of the file must be an error
    * @return Try[File]
    */
@@ -44,7 +43,7 @@ object FileUtils {
    * @return PartialFunction
    */
   def handleErrors(sender: CommandSender): PartialFunction[Throwable, Try[Any]] = {
-    case e @ (_:FileNotFoundException | _:FileAlreadyExistsException) =>
+    case e@(_: FileNotFoundException | _: FileAlreadyExistsException) =>
       PlayerUtils.sendMessage(sender, s"&c${e.getMessage}")
       Failure(e)
   }

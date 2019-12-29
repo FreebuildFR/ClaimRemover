@@ -12,7 +12,7 @@ object Period {
    * @return Time in milliseconds
    */
   def getInactivity(period: Period): Long = {
-    val years: Long = period.years * 365  * 24 * 60 * 60 * 1000
+    val years: Long = period.years * 365 * 24 * 60 * 60 * 1000
     val months: Long = period.months * 30 * 24 * 60 * 60 * 1000
     val days: Long = period.days * 24 * 60 * 60 * 1000
     val hours: Long = period.hours * 60 * 60 * 1000
@@ -30,4 +30,4 @@ case class Permissions(var enable: Boolean, ignoreGroups: List[String])
 /**
  * Config file
  */
-case class Config(claimSize: ClaimSize, inactivity: Inactivity, bans: Bans,  permissions: Permissions)
+case class Config(claimSize: ClaimSize, inactivity: Inactivity, bans: Bans, permissions: Permissions)

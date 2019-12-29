@@ -1,6 +1,6 @@
 package fr.freebuild.claimremover.commands
 
-import fr.freebuild.claimremover.ClaimRemoverPlugin.{analysis, configs}
+import fr.freebuild.claimremover.ClaimRemoverPlugin.configs
 import fr.freebuild.claimremover.configurations.models.Period
 import fr.freebuild.claimremover.utils.PlayerUtils
 import org.bukkit.command.CommandSender
@@ -12,16 +12,15 @@ object ConfigCommand extends Command {
 
   override def execute(sender: CommandSender, args: Seq[String]): Boolean = {
     PlayerUtils.sendMessage(sender,
-    s"""|${separator}
-        |${getConfigTitle("ClaimSize", configs.config.claimSize.enable)}
-        |  &6maxClaimSize:&7 ${configs.config.claimSize.maxClaimSize}
-        |  &6totalClaimSize:&7 ${configs.config.claimSize.totalClaimSize}
-        |${getConfigTitle("Inactivity", configs.config.inactivity.enable)}
-        |  &6period:&7 ${getInactivity(configs.config.inactivity.period)}
-        |${getConfigTitle("Bans", configs.config.bans.enable)}
-        |${getConfigTitle("Permissions", configs.config.permissions.enable)}
-        |  &6ignoreGroups:&7 ${configs.config.permissions.ignoreGroups.mkString(", ")}
-        |${separator}""".stripMargin
+      s"""|${separator}
+          |${getConfigTitle("ClaimSize", configs.config.claimSize.enable)}
+          |  &6maxClaimSize:&7 ${configs.config.claimSize.maxClaimSize}
+          |${getConfigTitle("Inactivity", configs.config.inactivity.enable)}
+          |  &6period:&7 ${getInactivity(configs.config.inactivity.period)}
+          |${getConfigTitle("Permissions", configs.config.permissions.enable)}
+          |  &6ignoreGroups:&7 ${configs.config.permissions.ignoreGroups.mkString(", ")}
+          |${getConfigTitle("Bans", configs.config.bans.enable)}
+          |${separator}""".stripMargin
     )
     true
   }

@@ -1,8 +1,7 @@
 package fr.freebuild.claimremover.configurations.loaders
 
-import io.circe.generic.auto._
-
 import fr.freebuild.claimremover.configurations.models.Config
+import io.circe.generic.auto._
 
 case class ConfigLoader(path: String) extends YamlLoader[Config] {
 

@@ -1,12 +1,12 @@
 package fr.freebuild.claimremover
 
-import fr.freebuild.claimremover.utils.PlayerUtils
 import fr.freebuild.claimremover.ClaimRemoverPlugin.configs
+import fr.freebuild.claimremover.utils.PlayerUtils
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 case class Permission(value: String) {
   def isSetOn(sender: CommandSender): Boolean = sender.hasPermission(value)
+
   def isSetOnWithMessage(sender: CommandSender): Boolean = {
     val isSet = isSetOn(sender)
     if (!isSet) PlayerUtils.sendMessage(sender, configs.language.errorMessages.permissionNotAllowed)

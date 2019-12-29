@@ -1,6 +1,5 @@
 package fr.freebuild.claimremover.commands
 
-import fr.freebuild.claimremover.ClaimRemoverPlugin
 import fr.freebuild.claimremover.ClaimRemoverPlugin.{analysis, configs}
 import fr.freebuild.claimremover.RegionsAnalysis
 import fr.freebuild.claimremover.utils.PlayerUtils
@@ -36,7 +35,7 @@ object InfoCommand extends Command {
     sb ++= infoDisplay.playersNumber.format(playersNumber)
     sb ++= infoDisplay.claimsNumber.format(analysis.regions.size)
     sb ++= infoDisplay.worldDetails
-    analysis.regions.foldLeft(Map[String, Int]()){
+    analysis.regions.foldLeft(Map[String, Int]()) {
       (acc, region) => acc + (region.getWorld -> (acc.getOrElse(region.getWorld, 0) + 1))
     }.foreach {
       case (world, quantity) => sb ++= s"- &f${world} : &7${quantity}\n"

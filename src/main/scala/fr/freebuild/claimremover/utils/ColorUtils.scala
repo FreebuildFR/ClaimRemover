@@ -1,8 +1,7 @@
 package fr.freebuild.claimremover.utils
 
-import org.bukkit.ChatColor
-
 import fr.freebuild.claimremover.ClaimRemoverPlugin.analysis
+import org.bukkit.ChatColor
 
 object ColorUtils {
   val pluginPrefix = "&9[ClaimRemover%s•&9] &7"
@@ -13,4 +12,5 @@ object ColorUtils {
       ChatColor.translateAlternateColorCodes('&', f"${prefix}${str.replace("\n", f"\n${prefix}")}")
     }
   }
+
 }

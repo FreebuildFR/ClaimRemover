@@ -2,15 +2,13 @@ package fr.freebuild.claimremover
 
 import java.util
 
-import fr.freebuild.claimremover.commands.{AnalyzeCommand, ClearCommand, ConfigCommand, DeleteCommand, ExportCommand, ImportCommand, InfoCommand, ReloadCommand, VersionCommand}
-import fr.freebuild.claimremover.Permissions
+import better.files._
+import fr.freebuild.claimremover.commands._
 import org.bukkit.command.{Command, CommandExecutor, CommandSender, TabCompleter}
 
 import scala.jdk.CollectionConverters._
-import better.files._
 
 object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
-  private val mainCommands = Seq("analyze", "config", "clear", "export", "import", "info", "delete", "reload", "version")
   private val deleteSubCommands = Seq("confirm")
   private val commands = Map(
     "analyze" -> (Permissions.CMD_ANALYZE, AnalyzeCommand),
@@ -27,30 +25,30 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
   /**
    * Called when ClaimRemover command is executed
    *
-   * @param sender Command sender
+   * @param sender  Command sender
    * @param command Command
-   * @param label Label
-   * @param args Parameters after command
+   * @param label   Label
+   * @param args    Parameters after command
    * @return
    */
-    override def onCommand(sender: CommandSender, command: Command, label: String, args: Array[String]): Boolean = {
-      args.toSeq match {
-        case head +: tail =>
-          commands.get(head).exists(command => {
-            val (permission, executor) = command
-            if (permission.isSetOnWithMessage(sender)) executor.execute(sender, tail) else true
-          })
-        case _ => false
-      }
+  override def onCommand(sender: CommandSender, command: Command, label: String, args: Array[String]): Boolean = {
+    args.toSeq match {
+      case head +: tail =>
+        commands.get(head).exists(command => {
+          val (permission, executor) = command
+          if (permission.isSetOnWithMessage(sender)) executor.execute(sender, tail) else true
+        })
+      case _ => false
     }
+  }
 
   /**
    * Called when tab complete the command
    *
-   * @param sender Command sender
+   * @param sender  Command sender
    * @param command Command
-   * @param alias Alias
-   * @param args Parameters after command
+   * @param alias   Alias
+   * @param args    Parameters after command
    * @return
    */
   override def onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array[String]): util.List[String] = {
@@ -72,7 +70,7 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
    * Filter a Seq of commands with startwith search
    *
    * @param commands List of commands
-   * @param search Search sentence
+   * @param search   Search sentence
    * @return Sequence filtered
    */
   private def filterCommands(commands: Seq[String], search: String) = commands.filter(_.startsWith(search))
@@ -81,8 +79,8 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
    * Filter a Seq of main commands with startwith search
    *
    * @param commands List of commands
-   * @param search Search sentence
-   * @param sender Command executor
+   * @param search   Search sentence
+   * @param sender   Command executor
    * @return Sequence filtered
    */
   private def filterCommands(commands: Map[String, (Permission, fr.freebuild.claimremover.commands.Command)], search: String, sender: CommandSender) = commands.filter(cmd => {
@@ -92,6 +90,7 @@ object ClaimRemoverCommandExecutor extends CommandExecutor with TabCompleter {
 
   /**
    * Filter analysis directory inside exports directory
+   *
    * @param search Directory analysis name to search
    * @return Directory listed
    */

@@ -4,17 +4,17 @@ import java.text.SimpleDateFormat
 import java.util.{Date, UUID}
 
 import br.net.fabiozumbi12.RedProtect.Bukkit.{RedProtect, Region}
-import fr.freebuild.claimremover.utils.PlayerUtils
 import fr.freebuild.claimremover.ClaimRemoverPlugin.{analysis, configs}
 import fr.freebuild.claimremover.RegionsAnalysis
 import fr.freebuild.claimremover.configurations.models.Period
+import fr.freebuild.claimremover.utils.PlayerUtils
 import litebans.api.Database
 import org.bukkit.command.CommandSender
 import ru.tehkode.permissions.bukkit.PermissionsEx
 
-import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, blocking}
+import scala.jdk.CollectionConverters._
 
 object AnalyzeCommand extends Command {
   private val dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss")
@@ -57,7 +57,7 @@ object AnalyzeCommand extends Command {
   /**
    * Define if a claim can be deleted
    *
-   * @param region Claim
+   * @param region          Claim
    * @param excludedPlayers Set of excluded players
    * @return
    */
@@ -70,7 +70,7 @@ object AnalyzeCommand extends Command {
   /**
    * Define if all leaders are not excluded
    *
-   * @param leaders Set of leaders
+   * @param leaders         Set of leaders
    * @param excludedPlayers Set of excluded players
    * @return True if none of leaders are excluded
    */
@@ -85,18 +85,18 @@ object AnalyzeCommand extends Command {
    */
   private def isPermissionGroupsIgnored(leaders: Set[String]): Boolean =
     !configs.config.permissions.enable ||
-    leaders.map(PermissionsEx.getUser).forall(_.getGroupNames.intersect(configs.config.permissions.ignoreGroups).length == 0)
+      leaders.map(PermissionsEx.getUser).forall(_.getGroupNames.intersect(configs.config.permissions.ignoreGroups).length == 0)
 
   /**
    * Define if leaders are inactive since a specific period
    *
-   * @param leaders Set of leaders affected
+   * @param leaders    Set of leaders affected
    * @param inactivity Inactivity in milliseconds
    * @return True if all leaders are inactive since a period
    */
   private def isInactive(leaders: Set[String], inactivity: Long): Boolean =
     !configs.config.inactivity.enable ||
-    leaders.forall((uuid) => new Date().getTime - inactivity > PlayerUtils.getLastConnection(uuid).getTime)
+      leaders.forall((uuid) => new Date().getTime - inactivity > PlayerUtils.getLastConnection(uuid).getTime)
 
   /**
    * Define if all leaders are banned
@@ -105,7 +105,8 @@ object AnalyzeCommand extends Command {
    * @param leaders Set of leaders affected
    * @return True if all leaders are banned
    */
+  // TODO Not yet used
   private def isBanned(leaders: Set[String]): Boolean =
-    configs.config.bans.enable &&
-    leaders.forall((uuid) => Database.get.isPlayerBanned(UUID.fromString(uuid), null))
+    !configs.config.bans.enable ||
+      leaders.forall((uuid) => Database.get.isPlayerBanned(UUID.fromString(uuid), null))
 }

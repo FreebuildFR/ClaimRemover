@@ -29,7 +29,7 @@ object DeleteCommand extends Command {
   /**
    * Remove all claims available inside analysis
    *
-   * @param sender Player or console that executed the command
+   * @param sender  Player or console that executed the command
    * @param regions Regions analyzed
    */
   private def removeClaims(sender: CommandSender, regions: List[Region]): Unit = {
