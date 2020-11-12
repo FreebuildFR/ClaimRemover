@@ -1,5 +1,5 @@
 val Name = "ClaimRemover"
-val Version = "0.0.1"
+val Version = "1.0.0"
 val GroupId = "fr.freebuild"
 
 name := Name
