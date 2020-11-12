@@ -6,6 +6,7 @@ import fr.freebuild.claimremover.utils.PlayerUtils
 import org.bukkit.command.CommandSender
 
 import scala.concurrent.{ExecutionContext, Future, blocking}
+import ExecutionContext.Implicits.global
 
 object DeleteCommand extends Command {
 
@@ -47,6 +48,6 @@ object DeleteCommand extends Command {
         }
         PlayerUtils.sendMessage(sender, configs.language.infoMessages.claimsDeleted.format(regions.size, regions.size))
       }
-    }(ExecutionContext.global)
+    }
   }
 }

@@ -14,6 +14,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx
 
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future, blocking}
+import ExecutionContext.Implicits.global
 import scala.jdk.CollectionConverters._
 
 object AnalyzeCommand extends Command {
@@ -27,7 +28,7 @@ object AnalyzeCommand extends Command {
         PlayerUtils.sendMessage(sender, configs.language.infoMessages.endAnalyze)
         InfoCommand.execute(sender, Seq.empty)
       }
-    }(ExecutionContext.global)
+    }
 
     true
   }

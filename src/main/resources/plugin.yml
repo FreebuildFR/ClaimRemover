@@ -2,6 +2,7 @@ name: ClaimRemover
 version: 0.0.1
 author: Freebuild
 api-version: "1.13"
+depend: [ScalaLoader]
 softdepend: [RedProtect, LiteBans, PermissionsEx]
 description: Remover plugin for RedProtect Claims
 main: fr.freebuild.claimremover.ClaimRemoverPlugin

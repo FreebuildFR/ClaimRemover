@@ -29,9 +29,8 @@ libraryDependencies ++= Seq(
     "io.circe" %% "circe-generic" % "0.12.0-RC4",
     "io.circe" %% "circe-parser" % "0.12.0-RC4",
     "io.circe" %% "circe-yaml" % "0.11.0-M1",
-    "org.bukkit" % "bukkit" % "1.14.4-R0.1-SNAPSHOT" % "provided",
-    "xyz.janboerman" % "ScalaLoader" % "0.12.1-SNAPSHOT" % "provided",
-    /* "com.github.Jannyboy11.ScalaPluginLoader" % "ScalaLoader" % "0.12.0-SNAPSHOT" % "provided", */
+    "org.spigotmc" % "spigot-api" % "1.16.4-R0.1-SNAPSHOT" % "provided",
+    "com.github.Jannyboy11" % "ScalaPluginLoader" % "0.13.6" % "provided",
 
     /* Minecraft plugin dependencies */
     "br.net.fabiozumbi12.RedProtect" % "RedProtect-Core" % "7.6.2" % "provided" intransitive(),
